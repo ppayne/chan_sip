@@ -21547,6 +21547,7 @@ static char *_sip_show_peer(int type, int fd, struct mansession *s, const struct
 		ast_cli(fd, "  Useragent    : %s\n", peer->useragent);
 		ast_cli(fd, "  Reg. Contact : %s\n", peer->fullcontact);
 		ast_cli(fd, "  Qualify Freq : %d ms\n", peer->qualifyfreq);
+		ast_cli(fd, "  Qualify      : %d%s\n", peer->maxms, peer->maxms ? " ms" : "");
 		ast_cli(fd, "  Keepalive    : %d ms\n", peer->keepalive * 1000);
 		if (peer->chanvars) {
 			ast_cli(fd, "  Variables    :\n");
@@ -22260,7 +22261,7 @@ static char *sip_show_settings(struct ast_cli_entry *e, int cmd, struct ast_cli_
 	ast_cli(a->fd, "  Record off feature:     %s\n", sip_cfg.default_record_off_feature);
 	ast_cli(a->fd, "  Force rport:            %s\n", force_rport_string(global_flags));
 	ast_cli(a->fd, "  DTMF:                   %s\n", dtmfmode2str(ast_test_flag(&global_flags[0], SIP_DTMF)));
-	ast_cli(a->fd, "  Qualify:                %d\n", default_qualify);
+	ast_cli(a->fd, "  Qualify:                %d%s\n", default_qualify, default_qualify ? " ms" : "");
 	ast_cli(a->fd, "  Keepalive:              %d\n", default_keepalive);
 	ast_cli(a->fd, "  Use ClientCode:         %s\n", AST_CLI_YESNO(ast_test_flag(&global_flags[0], SIP_USECLIENTCODE)));
 	ast_cli(a->fd, "  Progress inband:        %s\n", (ast_test_flag(&global_flags[0], SIP_PROG_INBAND) == SIP_PROG_INBAND_NEVER) ? "Never" : (AST_CLI_YESNO(ast_test_flag(&global_flags[0], SIP_PROG_INBAND) != SIP_PROG_INBAND_NO)));
