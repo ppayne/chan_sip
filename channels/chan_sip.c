@@ -7677,6 +7677,9 @@ static int sip_write(struct ast_channel *ast, struct ast_frame *frame)
 			sip_pvt_unlock(p);
 		}
 		break;
+	case AST_FRAME_CNG:
+		return 0; // ignore comfort noise
+		break;
 	default:
 		ast_log(LOG_WARNING, "Can't send %u type frames with SIP write\n", frame->frametype);
 		return 0;
